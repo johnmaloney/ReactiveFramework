@@ -4,17 +4,15 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7ED72F93-1B40-4155-876B-11F28BEF7410}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{D50BC58B-0322-4E1A-8455-E5A14998A983}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aetos.Messaging.Consoles.Publisher</RootNamespace>
-    <AssemblyName>Aetos.Messaging.Consoles.Publisher</AssemblyName>
+    <RootNamespace>Aetos.Messaging.Common</RootNamespace>
+    <AssemblyName>Aetos.Messaging.Common</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +22,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -42,22 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TopicPublisher.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Aetos.Messaging.Common\Aetos.Messaging.Common.csproj">
-      <Project>{d50bc58b-0322-4e1a-8455-e5a14998a983}</Project>
-      <Name>Aetos.Messaging.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Aetos.Messaging.Interfaces\Aetos.Messaging.Interfaces.csproj">
-      <Project>{9047d197-c6be-436d-ad6b-671d2432dc3e}</Project>
-      <Name>Aetos.Messaging.Interfaces</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
