@@ -35,14 +35,14 @@ namespace Aetos.Messaging.Domain.Topics
         public void DeleteSubcription()
         {
             ExecutePrimary(x => x.DeleteSubscription());
-            ExecuteSecondary(y => y.DeleteSecondary());
+            ExecuteSecondary(y => y.DeleteSubscription());
         }
 
-        protected override void LoadClientTypes(List<Type> clientType)
+        protected override void LoadClientTypes(List<Type> clientTypes)
         {
             clientTypes.Clear();
-            LoadClientTypes.Add(Type.GetType(Config.GetSettings("PrimaryTopicClientType")));
-            LoadClientTypes.Add(Type.GetType(Config.GetSettings("SecondaryTopicClientType")));
+            clientTypes.Add(Type.GetType(Config.GetSettings("PrimaryTopicClientType")));
+            clientTypes.Add(Type.GetType(Config.GetSettings("SecondaryTopicClientType")));
         }
 
         protected override ITopicClient CreateInstance(Type type)
