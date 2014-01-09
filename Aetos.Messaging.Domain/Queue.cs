@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Aetos.Messaging.Domain
 {
-    public struct Topic
+    public struct Queue
     {
-        public const string GeneralEvent = "general-event"; // azure requires lowercase
+        public const string GeneralCommand = "general-command";
     }
 }

@@ -3,19 +3,30 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Aetos.Messaging.Common;
 using Aetos.Messaging.Interfaces;
 
-namespace Aetos.Messaging.Domain.Topics
+namespace Aetos.Messaging.Domain.Clients
 {
     public class TopicClient : ClientBase<ITopicClient>, ITopicClient
     {
+        #region Fields
+
+        #endregion
+
+        #region Properties
+
         public string TopicName { get; private set; }
         public string SubscriptionName { get; private set; }
+
+        #endregion
+
+        #region Methods
 
         public TopicClient(string topicName) : this(topicName, null) { }
 
         public TopicClient(string topicName, string subscriptionName)
-            :base()
+            : base()
         {
             TopicName = topicName;
             SubscriptionName = subscriptionName;
@@ -23,16 +34,16 @@ namespace Aetos.Messaging.Domain.Topics
 
         public void Publish(Message message)
         {
-            ExecutePrimary(x => x.Publish(message), x => ExecuteSecondary(y => y.PublishMessage(message)));
+            ExecutePrimary(x => x.Publish(message), x => ExecuteSecondary(y => y.Publish(message)));
         }
-        
+
         public void Subscribe(Action<Message> onMessageReceived)
         {
             _onMessageReceived = onMessageReceived;
             Subscribe();
         }
 
-        public void DeleteSubcription()
+        public void DeleteSubscription()
         {
             ExecutePrimary(x => x.DeleteSubscription());
             ExecuteSecondary(y => y.DeleteSubscription());
@@ -49,5 +60,7 @@ namespace Aetos.Messaging.Domain.Topics
         {
             return (ITopicClient)Activator.CreateInstance(type, new object[] { TopicName, SubscriptionName });
         }
+
+        #endregion
     }
 }

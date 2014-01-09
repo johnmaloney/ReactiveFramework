@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
+using Aetos.Messaging.Common.Logging;
 using Aetos.Messaging.Interfaces;
 
-namespace Aetos.Messaging.Domain.Topics
+namespace Aetos.Messaging.Domain.Clients
 {
-    public class ClientBase<TClient>
+    public abstract class ClientBase<TClient>
         where TClient : class, IClient
     {
         #region Fields
@@ -108,7 +109,7 @@ namespace Aetos.Messaging.Domain.Topics
             }
         }
 
-        protected void Unsubscribe()
+        public void Unsubscribe()
         {
             foreach(var client in _clients)
             {
@@ -200,6 +201,7 @@ namespace Aetos.Messaging.Domain.Topics
                     onException(_clients[index]);
                 }
             }
+            return result;
         }
 
         #endregion

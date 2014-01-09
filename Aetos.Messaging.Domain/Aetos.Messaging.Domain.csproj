@@ -39,16 +39,23 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Clients\QueueClient.cs" />
+    <Compile Include="Commands\GeneralCommand.cs" />
+    <Compile Include="Events\GeneralEvent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queue.cs" />
     <Compile Include="Topic.cs" />
-    <Compile Include="Topics\ClientBase.cs" />
-    <Compile Include="Topics\TopicClient.cs" />
+    <Compile Include="Clients\ClientBase.cs" />
+    <Compile Include="Clients\TopicClient.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Commands\" />
     <Folder Include="Entity\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aetos.Messaging.Common\Aetos.Messaging.Common.csproj">
+      <Project>{d50bc58b-0322-4e1a-8455-e5a14998a983}</Project>
+      <Name>Aetos.Messaging.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Aetos.Messaging.Interfaces\Aetos.Messaging.Interfaces.csproj">
       <Project>{9047d197-c6be-436d-ad6b-671d2432dc3e}</Project>
       <Name>Aetos.Messaging.Interfaces</Name>

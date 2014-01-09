@@ -8,6 +8,9 @@ namespace Aetos.Messaging.Consoles.Publisher
 {
     class Program
     {
+        public static Random Random = new Random();
+        public static List<string> UpdateTitles { get; set; }
+
         static void Main(string[] args)
         {
             Console.ForegroundColor = ConsoleColor.DarkYellow;
@@ -40,6 +43,29 @@ namespace Aetos.Messaging.Consoles.Publisher
                     QueuePublisher.Run(cloud, method);
                     break;
             }
+        }
+
+        static Program()
+        {
+            UpdateTitles = new List<string>()
+                {
+                    "Update user file name preferences.", 
+                    "Update login information.",
+                    "Update max amount of xyz.", 
+                    "Change the default load time for abc.", 
+                    "Set the message title when entering application.", 
+                    "Add new payment methods to account.", 
+                    "Update contact information.", 
+                    "Alter the max return values for search.", 
+                    "Change user preferences for notification.", 
+                    "Add new default maps to user account"
+                };
+            
+        }
+
+        public static string GetRandomUpdate()
+        {
+            return UpdateTitles[Random.Next(0, UpdateTitles.Count - 1)];
         }
     }
 }

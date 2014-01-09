@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueuePublisher.cs" />
     <Compile Include="TopicPublisher.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,6 +54,10 @@
     <ProjectReference Include="..\Aetos.Messaging.Common\Aetos.Messaging.Common.csproj">
       <Project>{d50bc58b-0322-4e1a-8455-e5a14998a983}</Project>
       <Name>Aetos.Messaging.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aetos.Messaging.Domain\Aetos.Messaging.Domain.csproj">
+      <Project>{434b1256-13a8-4cca-bfd7-ea0d53f757d8}</Project>
+      <Name>Aetos.Messaging.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\Aetos.Messaging.Interfaces\Aetos.Messaging.Interfaces.csproj">
       <Project>{9047d197-c6be-436d-ad6b-671d2432dc3e}</Project>

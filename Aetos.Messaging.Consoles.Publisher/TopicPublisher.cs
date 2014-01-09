@@ -1,15 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Aetos.Messaging.Domain;
+using Aetos.Messaging.Domain.Events;
+using Aetos.Messaging.Domain.Clients;
 using Aetos.Messaging.Interfaces;
 
 namespace Aetos.Messaging.Consoles.Publisher
 {
     public class TopicPublisher
     {
+        #region Fields
+
         private static ITopicClient TopicClient;
+
+        #endregion
+
+        #region Properties
+        #endregion
+
+        #region Methods
 
         public static void Run(string cloud, string method)
         {
@@ -21,15 +34,15 @@ namespace Aetos.Messaging.Consoles.Publisher
             }
             else
             {
-                PublishTopic();
+                PublishSingleMessage();
             }
         }
 
         private static void SetupTopicClient(string cloud)
         {
-            var topicClient = new TopicClient(Topic.General);
+            var topicClient = new TopicClient(Topic.GeneralEvent);
 
-            switch(cloud)
+            switch (cloud)
             {
                 case "p":
                     TopicClient = topicClient.Primary;
@@ -58,16 +71,22 @@ namespace Aetos.Messaging.Consoles.Publisher
         {
             var generalMessage = GetGeneralMessage();
             TopicClient.Publish(new Message
-                {
-                    Body = generalMessage
-                });
+            {
+                Body = generalMessage
+            });
             Console.WriteLine("Published new General Message.");
         }
 
-        public static dynamic GetGeneralMessage()
+        public static GeneralEvent GetGeneralMessage()
         {
             // This is a default or test message generator //
-            return null;
+            return new GeneralEvent()
+            {
+                Message = "New Topic, identifier: #" + new Random().Next().ToString(),
+                LastUpdated = DateTime.UtcNow
+            };
         }
+
+        #endregion
     }
 }
