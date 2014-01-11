@@ -4,12 +4,12 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9047D197-C6BE-436D-AD6B-671D2432DC3E}</ProjectGuid>
+    <ProjectGuid>{15830D4F-6D2C-4DAF-A478-D61693B92A71}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Aetos.Messaging.Interfaces</RootNamespace>
-    <AssemblyName>Aetos.Messaging.Interfaces</AssemblyName>
-    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <RootNamespace>Aetos.Messaging.Handlers</RootNamespace>
+    <AssemblyName>Aetos.Messaging.Handlers</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -30,9 +30,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -42,20 +39,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\IMessageHandler.cs" />
-    <Compile Include="IClient.cs" />
-    <Compile Include="IQueueClient.cs" />
-    <Compile Include="ITopicClient.cs" />
-    <Compile Include="Message.cs" />
+    <Compile Include="Commands\GeneralEventHandler.cs" />
+    <Compile Include="MessageHandlerFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Aetos.Messaging.Common\Aetos.Messaging.Common.csproj">
       <Project>{d50bc58b-0322-4e1a-8455-e5a14998a983}</Project>
       <Name>Aetos.Messaging.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aetos.Messaging.Domain\Aetos.Messaging.Domain.csproj">
+      <Project>{434b1256-13a8-4cca-bfd7-ea0d53f757d8}</Project>
+      <Name>Aetos.Messaging.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aetos.Messaging.Interfaces\Aetos.Messaging.Interfaces.csproj">
+      <Project>{9047d197-c6be-436d-ad6b-671d2432dc3e}</Project>
+      <Name>Aetos.Messaging.Interfaces</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

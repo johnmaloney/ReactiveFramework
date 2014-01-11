@@ -9,7 +9,7 @@ namespace Aetos.Messaging.Common
 {
     public static class Config
     {
-        public static string GetSettings(string name)
+        public static string GetSetting(string name)
         {
             var value = ConfigurationManager.AppSettings[name];
 
