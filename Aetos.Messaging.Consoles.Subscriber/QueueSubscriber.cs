@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Aetos.Messaging.Common.Logging;
 using Aetos.Messaging.Domain.Clients;
+using Aetos.Messaging.Handlers;
 using Aetos.Messaging.Interfaces;
 
 namespace Aetos.Messaging.Consoles.Subscriber

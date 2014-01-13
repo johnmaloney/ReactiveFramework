@@ -47,8 +47,8 @@ namespace Aetos.Messaging.Domain.Clients
         protected override void LoadClientTypes(List<Type> clientTypes)
         {
             clientTypes.Clear();
-            clientTypes.Add(Type.GetType(Config.GetSettings("PrimaryQueueClientType")));
-            clientTypes.Add(Type.GetType(Config.GetSettings("SecondaryQueueClientType")));
+            clientTypes.Add(Type.GetType(Config.GetSetting("PrimaryQueueClientType")));
+            clientTypes.Add(Type.GetType(Config.GetSetting("SecondaryQueueClientType")));
         }
 
         protected override IQueueClient CreateInstance(Type type)

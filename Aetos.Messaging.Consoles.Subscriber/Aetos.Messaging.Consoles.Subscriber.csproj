@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Aetos.Messaging.Consoles.Subscriber</RootNamespace>
     <AssemblyName>Aetos.Messaging.Consoles.Subscriber</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -50,6 +51,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aetos.Messaging.Azure\Aetos.Messaging.Azure.csproj">
+      <Project>{7d965a87-57c2-4315-81f0-c571ee0cec0f}</Project>
+      <Name>Aetos.Messaging.Azure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Aetos.Messaging.Common\Aetos.Messaging.Common.csproj">
       <Project>{d50bc58b-0322-4e1a-8455-e5a14998a983}</Project>
       <Name>Aetos.Messaging.Common</Name>
@@ -57,6 +62,10 @@
     <ProjectReference Include="..\Aetos.Messaging.Domain\Aetos.Messaging.Domain.csproj">
       <Project>{434b1256-13a8-4cca-bfd7-ea0d53f757d8}</Project>
       <Name>Aetos.Messaging.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Aetos.Messaging.Handlers\Aetos.Messaging.Handlers.csproj">
+      <Project>{15830d4f-6d2c-4daf-a478-d61693b92a71}</Project>
+      <Name>Aetos.Messaging.Handlers</Name>
     </ProjectReference>
     <ProjectReference Include="..\Aetos.Messaging.Interfaces\Aetos.Messaging.Interfaces.csproj">
       <Project>{9047d197-c6be-436d-ad6b-671d2432dc3e}</Project>

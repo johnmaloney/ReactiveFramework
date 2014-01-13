@@ -12,9 +12,9 @@ using Aetos.Messaging.Interfaces.Commands;
 
 namespace Aetos.Messaging.Handlers.Commands
 {
-    public class GeneralEventHandler : IMessageHandler
+    public class GeneralCommandHandler : IMessageHandler
     {
-        private static IQueueClient _QueueClient = new QueueClient(Queue.GeneralCommand);
+        private static ITopicClient _TopicClient = new TopicClient(Topic.GeneralEvent);
 
         public void Handle(Message message)
         {
@@ -24,13 +24,10 @@ namespace Aetos.Messaging.Handlers.Commands
                 // Store the title 
                 var generalEvent = new Message
                 {
-                    Body = new GeneralEvent()
+                    Body = new GeneralEvent() { Message = generalCommand.Title }
                 };
 
-                if (!_QueueClient.HasMessages())
-                {
-                    _QueueClient.Send(generalEvent);
-                }
+                _TopicClient.Publish(generalEvent);
             }
         }
     }

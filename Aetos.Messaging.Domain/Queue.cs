@@ -9,5 +9,6 @@ namespace Aetos.Messaging.Domain
     public struct Queue
     {
         public const string GeneralCommand = "general-command";
+        public const string BroadcastGeneral = "broadcast-general";
     }
 }

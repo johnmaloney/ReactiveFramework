@@ -18,7 +18,7 @@ namespace Aetos.Messaging.Common.Logging
 
         public override string ToString()
         {
-            return string.Format("{0}-{1}-{2}. {3}", Host, RecordedAtUtc, Level, Message);
+            return string.Format("{0}-{1}-{2}. \r {3}", Host, RecordedAtUtc, Level, Message);
         }
     }
 }

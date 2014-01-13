@@ -25,9 +25,25 @@ namespace Aetos.Messaging.Domain.Clients
 
         #region Properties
         
-        public TClient Primary { get { return _clients.First(); } }
+        public TClient Primary 
+        { 
+            get
+            {
+                if (_clients[0] == null)
+                    EnsureClient(0);
+                return _clients.First(); 
+            } 
+        }
 
-        public TClient Secondary { get { return _clients.Last();  } }
+        public TClient Secondary 
+        { 
+            get
+            {
+                if (_clients[1] == null)
+                    EnsureClient(1);
+                return _clients.Last();  
+            } 
+        }
         
         #endregion
 
@@ -40,7 +56,7 @@ namespace Aetos.Messaging.Domain.Clients
         public ClientBase()
         {
             LoadClientTypes(_clientTypes);
-            _heartbeat = new Timer(10000);
+            _heartbeat = new Timer(100000);
             _heartbeat.Elapsed += OnHeartbeatElapsed;
         }
 

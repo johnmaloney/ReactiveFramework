@@ -41,7 +41,7 @@ namespace Aetos.Messaging.Consoles.Publisher
         private static void SetupTopicClient(string cloud)
         {
             var topicClient = new TopicClient(Topic.GeneralEvent);
-
+          
             switch (cloud)
             {
                 case "p":
@@ -70,10 +70,12 @@ namespace Aetos.Messaging.Consoles.Publisher
         private static void PublishMockGeneralMessage()
         {
             var generalMessage = GetGeneralMessage();
+
             TopicClient.Publish(new Message
             {
                 Body = generalMessage
             });
+
             Console.WriteLine("Published new General Message.");
         }
 

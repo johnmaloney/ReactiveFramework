@@ -30,10 +30,12 @@ namespace Aetos.Messaging.Domain.Clients
         {
             TopicName = topicName;
             SubscriptionName = subscriptionName;
+
+            //StartPrimary();
         }
 
         public void Publish(Message message)
-        {
+        {           
             ExecutePrimary(x => x.Publish(message), x => ExecuteSecondary(y => y.Publish(message)));
         }
 
@@ -52,8 +54,8 @@ namespace Aetos.Messaging.Domain.Clients
         protected override void LoadClientTypes(List<Type> clientTypes)
         {
             clientTypes.Clear();
-            clientTypes.Add(Type.GetType(Config.GetSettings("PrimaryTopicClientType")));
-            clientTypes.Add(Type.GetType(Config.GetSettings("SecondaryTopicClientType")));
+            clientTypes.Add(Type.GetType(Config.GetSetting("PrimaryTopicClientType")));
+            clientTypes.Add(Type.GetType(Config.GetSetting("SecondaryTopicClientType")));
         }
 
         protected override ITopicClient CreateInstance(Type type)
