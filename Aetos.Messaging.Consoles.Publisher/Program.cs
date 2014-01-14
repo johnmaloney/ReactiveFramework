@@ -22,7 +22,7 @@ namespace Aetos.Messaging.Consoles.Publisher
             {
                 Console.WriteLine("Run from the CLOUD? ({p} - primary | {s} - secondary | {b} both)");
                 cloud = Console.ReadLine();
-                Console.WriteLine("Which action? ({p} - publish | {s} - send)");
+                Console.WriteLine("Which action? ({s} - publish single item | {ss} publish single item to subscription only | {m} - publish mulitple items)");
                 method = Console.ReadLine();
                 Console.WriteLine("Publish? ({t} - topic | {q} queue)");
                 mode = Console.ReadLine();

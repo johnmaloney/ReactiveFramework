@@ -27,20 +27,28 @@ namespace Aetos.Messaging.Consoles.Publisher
 
         public static void Run(string cloud, string method)
         {
-            SetupQueueClient(cloud);
+            SetupQueueClient(cloud, method);
             if (method == "s")
             {
-                SendQueueMessage();
+                SendSingleQueueMessage();
             }
-            else
+            else if ( method == "ss")
             {
-                PublishQueueMessages();
+                SendSingleSubscriberBasedQueueMessage();
+            }
+            else if (method == "m")
+            {
+                PublishMultipleQueueMessages();
             }
         }
 
-        private static void SetupQueueClient(string cloud)
+        private static void SetupQueueClient(string cloud, string method)
         {
-            var queueClient = new QueueClient(Queue.GeneralCommand);
+            string queueName = Queue.GeneralCommand;
+            if (method == "ss")
+                queueName = Queue.GeneralSubscriptionCommand;
+
+            var queueClient = new QueueClient(queueName);
             switch(cloud)
             {
                 case "p":
@@ -56,7 +64,7 @@ namespace Aetos.Messaging.Consoles.Publisher
             Console.WriteLine("Queue Publisher: general-message");
         }
 
-        private static void SendQueueMessage()
+        private static void SendSingleQueueMessage()
         {
             Log.Info("--Queue Publisher Ready--");
             
@@ -75,7 +83,29 @@ namespace Aetos.Messaging.Consoles.Publisher
             }
         }
 
-        private static void  PublishQueueMessages()
+        private static void SendSingleSubscriberBasedQueueMessage()
+        {
+            Log.Info("--Specific Subscription Queue Publisher Ready-- Enter as [subscriptionName, message]");
+
+            var cmd = Console.ReadLine();
+            while (cmd != "x")
+            {
+                string[] split = cmd.Split(',');
+                
+                var message = new Message
+                {
+                    Body = new GeneralSubscriptionCommand
+                    {
+                        SubscriptionName = split[0],
+                        Title = "Subscription based command: " + cmd
+                    }
+                };
+                QueueClient.Send(message);
+                cmd = Console.ReadLine();
+            }
+        }
+
+        private static void  PublishMultipleQueueMessages()
         {
             Log.Info("--Queue Publisher Ready--");
             var timer = new Timer();

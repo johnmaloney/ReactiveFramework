@@ -20,6 +20,7 @@ namespace Aetos.Messaging.Handlers
         {
             _Handlers = new Dictionary<string, IMessageHandler>();
             _Handlers.Add(typeof(GeneralCommand).GetMessageType(), new GeneralCommandHandler());
+            _Handlers.Add(typeof(GeneralSubscriptionCommand).GetMessageType(), new GeneralSubscriptionCommandHandler());
         }
 
         public static IMessageHandler GetMessageHandler(Message message)

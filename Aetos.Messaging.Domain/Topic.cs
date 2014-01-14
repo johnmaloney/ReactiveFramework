@@ -9,5 +9,6 @@ namespace Aetos.Messaging.Domain
     public struct Topic
     {
         public const string GeneralEvent = "general-event"; // azure requires lowercase
+        public const string GeneralSubscriptionEvent = "general-subscription-event";
     }
 }

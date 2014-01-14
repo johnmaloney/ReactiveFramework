@@ -30,8 +30,6 @@ namespace Aetos.Messaging.Domain.Clients
         {
             TopicName = topicName;
             SubscriptionName = subscriptionName;
-
-            //StartPrimary();
         }
 
         public void Publish(Message message)
