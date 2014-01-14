@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Owin;
 
-namespace Aetos.Messaging.Clients.Web.App_Start
+namespace Aetos.Messaging.Clients.Web
 {
     public class Startup
     {
