@@ -15,7 +15,7 @@ namespace Aetos.Messaging.Clients.Web
 
             routes.MapRoute(
                 name: "Default",
-                url: "/index.html"
+                url: "index.html"
             );
         }
     }
