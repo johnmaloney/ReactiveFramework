@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using SNL.GIS.Clients.Web.Models;
 
 namespace SNL.GIS.Clients.Web
 {
@@ -22,6 +23,13 @@ namespace SNL.GIS.Clients.Web
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            AuthenticationSubscriber.Start();
+        }
+
+        protected void Application_End()
+        {
+            AuthenticationSubscriber.Stop();
         }
     }
 }

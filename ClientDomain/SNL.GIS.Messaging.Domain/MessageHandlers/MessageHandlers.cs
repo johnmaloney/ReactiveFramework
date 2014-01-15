@@ -13,7 +13,7 @@ namespace SNL.GIS.Messaging.Domain
     {
         public static void Initialize()
         {
-            //MessageHandlerFactory.AddOrReplace(typeof(AuthenticateUserCommand), new AuthenticateUserHandler);
+            MessageHandlerFactory.AddOrReplace(typeof(AuthenticateUserCommand), new AuthenticateUserHandler);
             MessageHandlerFactory.AddOrReplace(typeof(InitializeUserCommand), new InitializeUserHandler());
             //MessageHandlerFactory.AddOrReplace(typeof(RetrieveLayerCommand), new RetrieveLayerHandler);
             //MessageHandlerFactory.AddOrReplace(typeof(UserSearchCommand), new UserSearchHandler);

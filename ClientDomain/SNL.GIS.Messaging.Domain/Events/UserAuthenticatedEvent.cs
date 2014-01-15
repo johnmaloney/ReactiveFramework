@@ -8,7 +8,8 @@ namespace SNL.GIS.Messaging.Domain.Events
 {
     public class UserAuthenticatedEvent
     {
-        public Guid Identifier { get; set; }
+        public Guid InstanceId { get; set; }
+        public string Identifier { get; set; }
         public bool IsAuthenticated { get; set; }
         public string AuthToken { get; set; }
     }

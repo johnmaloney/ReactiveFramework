@@ -47,6 +47,7 @@
     <Compile Include="Events\UserAuthenticatedEvent.cs" />
     <Compile Include="Events\UserLayersEvent.cs" />
     <Compile Include="Events\UserSearchResultEvent.cs" />
+    <Compile Include="MessageHandlers\AuthenticateUserHandler.cs" />
     <Compile Include="MessageHandlers\MessageHandlers.cs" />
     <Compile Include="MessageHandlers\InitializeUserHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
