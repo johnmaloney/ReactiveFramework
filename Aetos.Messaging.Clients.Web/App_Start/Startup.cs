@@ -10,7 +10,7 @@ namespace Aetos.Messaging.Clients.Web
     {
         public void Configuration(IAppBuilder app)
         {
-
+            app.MapSignalR();
         }
     }
 }

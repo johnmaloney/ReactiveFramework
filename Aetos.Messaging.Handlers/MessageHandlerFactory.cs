@@ -27,5 +27,18 @@ namespace Aetos.Messaging.Handlers
         {
             return _Handlers[message.Body.GetMessageType()];
         }
+
+        public static void AddOrReplace(Type commandType, IMessageHandler messageHandler)
+        {
+            string commandTypeKey = commandType.GetMessageType();
+            if (_Handlers.ContainsKey(commandTypeKey))
+            {
+                _Handlers[commandTypeKey] = messageHandler;
+            }
+            else
+            {
+                _Handlers.Add(commandTypeKey, messageHandler);
+            }
+        }
     }
 }

@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E21B6D58-53EE-4F79-9CB8-39461958F347}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SNL.GIS.Messaging.Domain</RootNamespace>
+    <AssemblyName>SNL.GIS.Messaging.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commands\RetrieveLayerCommand.cs" />
+    <Compile Include="Commands\InitializeUserCommand.cs" />
+    <Compile Include="Commands\AuthenticateUserCommand.cs" />
+    <Compile Include="Commands\UserSearchCommand.cs" />
+    <Compile Include="Events\LayerRetrievedEvent.cs" />
+    <Compile Include="Events\UserAuthenticatedEvent.cs" />
+    <Compile Include="Events\UserLayersEvent.cs" />
+    <Compile Include="Events\UserSearchResultEvent.cs" />
+    <Compile Include="MessageHandlers\MessageHandlers.cs" />
+    <Compile Include="MessageHandlers\InitializeUserHandler.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SNLQueue.cs" />
+    <Compile Include="SNLTopic.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Aetos.Messaging.Common\Aetos.Messaging.Common.csproj">
+      <Project>{d50bc58b-0322-4e1a-8455-e5a14998a983}</Project>
+      <Name>Aetos.Messaging.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Aetos.Messaging.Domain\Aetos.Messaging.Domain.csproj">
+      <Project>{434b1256-13a8-4cca-bfd7-ea0d53f757d8}</Project>
+      <Name>Aetos.Messaging.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Aetos.Messaging.Handlers\Aetos.Messaging.Handlers.csproj">
+      <Project>{15830d4f-6d2c-4daf-a478-d61693b92a71}</Project>
+      <Name>Aetos.Messaging.Handlers</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Aetos.Messaging.Interfaces\Aetos.Messaging.Interfaces.csproj">
+      <Project>{9047d197-c6be-436d-ad6b-671d2432dc3e}</Project>
+      <Name>Aetos.Messaging.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

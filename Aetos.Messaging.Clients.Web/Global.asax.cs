@@ -19,6 +19,13 @@ namespace Aetos.Messaging.Clients.Web
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            MessageSubscriber.Start();
+        }
+
+        protected void Application_End()
+        {
+            MessageSubscriber.Stop();
         }
     }
 }

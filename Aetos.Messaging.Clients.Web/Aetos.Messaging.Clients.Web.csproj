@@ -130,6 +130,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\MessageHub.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -192,6 +193,7 @@
     <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Scripts\jquery.signalR-2.0.1.js" />
     <Content Include="Scripts\jquery.signalR-2.0.1.min.js" />
+    <Content Include="Scripts\messaging.js" />
     <Content Include="Scripts\morris\chart-data-morris.js" />
     <Content Include="Scripts\tablesorter\jquery.tablesorter.js" />
     <Content Include="Scripts\tablesorter\tables.js" />
@@ -209,12 +211,15 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controllers\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Aetos.Messaging.Azure\Aetos.Messaging.Azure.csproj">
+      <Project>{7d965a87-57c2-4315-81f0-c571ee0cec0f}</Project>
+      <Name>Aetos.Messaging.Azure</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Aetos.Messaging.Common\Aetos.Messaging.Common.csproj">
       <Project>{d50bc58b-0322-4e1a-8455-e5a14998a983}</Project>
       <Name>Aetos.Messaging.Common</Name>
