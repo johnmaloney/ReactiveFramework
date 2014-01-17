@@ -11,6 +11,10 @@ using azure = Microsoft.ServiceBus.Messaging;
 
 namespace Aetos.Messaging.Azure
 {
+    /// <summary>
+    /// Windows Azure Service Bus Client 
+    /// http://msdn.microsoft.com/en-us/library/windowsazure/ee732537.aspx
+    /// </summary>
     public class QueueClient : IQueueClient
     {
         private azure.QueueClient _queueClient;
@@ -28,6 +32,7 @@ namespace Aetos.Messaging.Azure
             QueueName = queueName;
             Ensure();
             EnsureClient();
+           
         }
 
         private void EnsureClient()
@@ -50,6 +55,11 @@ namespace Aetos.Messaging.Azure
             _queueClient.Send(brokeredMessage);
         }
 
+        /// <summary>
+        /// Handles the entry of a new command in the Queue, will remove 
+        /// the command from the queue.
+        /// </summary>
+        /// <param name="onMessageReceived"></param>
         public void Subscribe(Action<Message> onMessageReceived)
         {
             try
@@ -70,13 +80,6 @@ namespace Aetos.Messaging.Azure
             }
         }
 
-        public void Unsubscribe()
-        {
-            _isListening = false;
-            _queueClient.Close();
-            _queueClient = null;
-        }
-
         private void OnMessageReceived(BrokeredMessage brokeredMessage)
         {
             if (_receiveAction != null)
@@ -84,6 +87,47 @@ namespace Aetos.Messaging.Azure
                 _receiveAction(AzureMessage.Unwrap(brokeredMessage));
                 brokeredMessage.Complete();
             }
+        }
+
+        /// <summary>
+        /// This method is different than Subscribe in that it only listens
+        /// for new queued entries, it will not remove them from the Queue.
+        /// </summary>
+        /// <param name="onMessageReceived"></param>
+        public void Listen(Action<Message> onMessageReceived)
+        {
+            try
+            {
+                _receiveAction = onMessageReceived;
+                EnsureClient();
+                var options = new OnMessageOptions
+                {
+                    MaxConcurrentCalls = 10
+                };
+                _queueClient.OnMessage(OnMessageReceivedLeaveInQueue, options);
+                _isListening = true;
+            }
+            catch
+            {
+                _isListening = false;
+                throw;
+            }
+        }
+
+        private void OnMessageReceivedLeaveInQueue(BrokeredMessage brokeredMessage)
+        {
+            if (_receiveAction != null)
+            {
+                _receiveAction(AzureMessage.Unwrap(brokeredMessage));
+                brokeredMessage.Abandon();
+            }
+        }
+
+        public void Unsubscribe()
+        {
+            _isListening = false;
+            _queueClient.Close();
+            _queueClient = null;
         }
 
         public bool HasMessages()
@@ -95,6 +139,26 @@ namespace Aetos.Messaging.Azure
         public bool IsListening()
         {
             return _isListening;
+        }
+
+        public IEnumerable<Message> PeekAtAllMessages()
+        {
+            var messagesInQueue = new List<Message>();
+            BrokeredMessage currentMessage = null;
+            do
+            {
+                /// The Peek method will take the 1st item off the Queue //
+                /// Subsequent calls to it actually move through the list //
+                /// as long as the _queueClient is a static variable //
+                /// http://stackoverflow.com/questions/18520714/azure-service-bus-queue-peekbatch-locking
+                currentMessage = _queueClient.Peek();
+                
+                if (currentMessage != null)
+                    messagesInQueue.Add(AzureMessage.Unwrap(currentMessage));
+
+            } while (currentMessage != null);
+
+            return messagesInQueue;
         }
 
         public void DeleteQueue()

@@ -71,6 +71,10 @@
       <Project>{9047d197-c6be-436d-ad6b-671d2432dc3e}</Project>
       <Name>Aetos.Messaging.Interfaces</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ClientDomain\SNL.GIS.Messaging.Domain\SNL.GIS.Messaging.Domain.csproj">
+      <Project>{e21b6d58-53ee-4f79-9cb8-39461958f347}</Project>
+      <Name>SNL.GIS.Messaging.Domain</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Aetos.Messaging.Handlers;
+using SNL.GIS.Messaging.Domain.Commands;
+using SNL.GIS.Messaging.Domain.MessageHandlers;
 
 namespace Aetos.Messaging.Consoles.Subscriber
 {
@@ -12,6 +15,7 @@ namespace Aetos.Messaging.Consoles.Subscriber
 
         static void Main(string[] args)
         {
+            MessageHandler.Initialize(); 
             Console.ForegroundColor = ConsoleColor.Green;
             string mode;
 

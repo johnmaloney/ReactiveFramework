@@ -115,6 +115,11 @@ namespace Aetos.Messaging.Domain.Clients
             }
         }
 
+        /// <summary>
+        /// Starts all Client instances and begin to listen for new
+        /// Queue items to be entered, will remove an item from the 
+        /// Queue when it is receieved in this Client.
+        /// </summary>
         protected void Subscribe()
         {
             if(_onMessageReceived != null)
@@ -122,6 +127,19 @@ namespace Aetos.Messaging.Domain.Clients
                 StartSubscriber(0);
                 StartSubscriber(1);
                 _heartbeat.Start();
+            }
+        }
+
+        /// <summary>
+        /// This is used as a listener for the Queue, it will not
+        /// attempt to process the Queue item only listens for new entries.
+        /// </summary>
+        protected void Listen()
+        {
+            if (_onMessageReceived != null)
+            {
+                StartSubscriber(0, false);
+                StartSubscriber(1, false);
             }
         }
 
@@ -149,13 +167,20 @@ namespace Aetos.Messaging.Domain.Clients
         {
             StartSubscriber(1);
         }
-
-        private void StartSubscriber(int index)
+        
+        private void StartSubscriber(int index, bool shouldProcessMessages = true)
         {
             EnsureClient(index);
             
             if (_clients[index] != null)
-                Execute(x => x.Subscribe(_onMessageReceived), index);
+            {
+                if (shouldProcessMessages) 
+                    // Meaning should remove the message from the Queue Permanently
+                    Execute(x => x.Subscribe(_onMessageReceived), index);
+                else 
+                    // Will leave the messages on the Queue for some other QueueClient
+                    Execute(x => x.Listen(_onMessageReceived), index);
+            }
 
             Log.Debug("** ClientBase.StartSubscriber, subscribed at index:{0}", index);
         }

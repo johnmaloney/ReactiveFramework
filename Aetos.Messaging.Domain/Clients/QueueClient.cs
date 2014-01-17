@@ -37,11 +37,36 @@ namespace Aetos.Messaging.Domain.Clients
             Subscribe();
         }
 
+        public void Listen(Action<Message> onMessageReceived)
+        {
+            _onMessageReceived = onMessageReceived;
+            Listen();
+            
+        }
+
         public void DeleteQueue()
         {
             ExecutePrimary(x => x.DeleteQueue());
 
             ExecuteSecondary(x => x.DeleteQueue());
+        }
+
+        public IEnumerable<Message> PeekAtAllMessages()
+        {
+            try
+            {
+                return ExecutePrimary<IEnumerable<Message>>(x =>
+                {
+                    return x.PeekAtAllMessages();
+                });
+            }
+            catch
+            {
+                return ExecuteSecondary<IEnumerable<Message>>(x =>
+                {
+                    return x.PeekAtAllMessages();
+                });
+            }
         }
 
         protected override void LoadClientTypes(List<Type> clientTypes)

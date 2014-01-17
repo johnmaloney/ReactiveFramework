@@ -7,9 +7,9 @@ using Aetos.Messaging.Handlers;
 using SNL.GIS.Messaging.Domain.Commands;
 using SNL.GIS.Messaging.Domain.MessageHandlers;
 
-namespace SNL.GIS.Messaging.Domain
+namespace SNL.GIS.Messaging.Domain.MessageHandlers
 {
-    public static class MassageHandlers
+    public static class MessageHandler
     {
         public static void Initialize()
         {

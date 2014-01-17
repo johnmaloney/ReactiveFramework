@@ -11,5 +11,7 @@ namespace Aetos.Messaging.Interfaces
         string QueueName { get; }
         void Send(Message message);
         void DeleteQueue();
+
+        IEnumerable<Message> PeekAtAllMessages();
     }
 }

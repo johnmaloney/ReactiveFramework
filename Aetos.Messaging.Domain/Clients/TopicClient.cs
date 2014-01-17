@@ -43,6 +43,12 @@ namespace Aetos.Messaging.Domain.Clients
             Subscribe();
         }
 
+        public void Listen(Action<Message> onMessageReceived)
+        {
+            /// This can be supported for the TopicClient but there is not an immediate need for it //
+            throw new NotImplementedException("Listening is not supported on the TopicClient, See QueueClient for implementation details.");
+        }
+
         public void DeleteSubscription()
         {
             ExecutePrimary(x => x.DeleteSubscription());
