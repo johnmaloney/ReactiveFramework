@@ -44,6 +44,11 @@ namespace Aetos.Messaging.Domain.Clients
             
         }
 
+        public void ProcessSingle(Message message)
+        {
+            ExecutePrimary(x => x.ProcessSingle(message), y => y.ProcessSingle(message));
+        }
+
         public void DeleteQueue()
         {
             ExecutePrimary(x => x.DeleteQueue());

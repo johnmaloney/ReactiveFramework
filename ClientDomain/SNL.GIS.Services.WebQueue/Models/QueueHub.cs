@@ -28,7 +28,7 @@ namespace SNL.GIS.Services.WebQueue
 
         #region Methods
 
-        public void ProcessQueueItem(string message)
+        public bool ProcessQueueItem(string message)
         {
             dynamic container = JObject.Parse(message);
             var jsonObject = JObject.Parse(container.Body.ToString());
@@ -36,7 +36,8 @@ namespace SNL.GIS.Services.WebQueue
 
             var commandMessage = new Message
             {
-                Body = messageBody
+                Body = messageBody,
+                SequenceNumber = container.SequenceNumber
             };
 
             var handler = MessageHandlerFactory.GetMessageHandler(commandMessage);
@@ -83,7 +84,7 @@ namespace SNL.GIS.Services.WebQueue
 
             foreach (IQueueClient client in queueClients.Values)
             {
-                client.Subscribe(onMessageReceived);
+                client.Listen(onMessageReceived);
             }
 
             /// Sets up the Message handlers for this domain //
@@ -94,10 +95,28 @@ namespace SNL.GIS.Services.WebQueue
         {
             //var item = message.Body as AuthenticateUserCommand;
 
-            dynamic item = new { Identifier = Guid.NewGuid().ToString(), MessageType = message.MessageType, Body = message.Body };
+            dynamic item = new 
+            { 
+                Identifier = Guid.NewGuid().ToString(), 
+                MessageType = message.MessageType, 
+                Body = message.Body, 
+                SequenceNumber = message.SequenceNumber 
+            };
+
             var json = JsonConvert.SerializeObject(item);
             CurrentQueuedCommands.Add(json);
             Clients.All.queueUpdated(json);
+        }
+
+        public void FinishedProcessingQueueItem(string identifier)
+        {
+            dynamic itemToClear = new
+                {
+                    Identifier = identifier
+                };
+
+            var json = JsonConvert.SerializeObject(itemToClear);
+            Clients.All.clearProcessedItem(itemToClear);
         }
 
         public static void Start()

@@ -9,7 +9,7 @@
         var messages = $('#messages');
         var messagesBody = messages.find('tbody');
 
-        var newRow = '<tr> ' +
+        var newRow = '<tr id="' + newMessage.Identifier + 'ROW"> ' +
                         '<td colspan="3">' + newMessage.MessageType + '</td>' +
                         '<td><a class="align-right" id="'+ newMessage.Identifier +'" href="#" data-command=\'' + msg + '\'><i class="fa fa-wrench"></i> PROCESS</a></td>' +
                      '</tr>'
@@ -21,11 +21,23 @@
             var message = $(this).data('command');
             var json = JSON.stringify(message);
             console.log(json);
-            hub.server.processQueueItem(json);
+
+            hub.server.processQueueItem(json).done(function (success) {
+                
+            });
+
             console.log("Finished server call");
         });
     };
     
+    hub.client.clearProcessedItem = function (itemToClear) {
+
+        console.log('Attempting to clear item: ' + JSON.stringify(itemToClear));
+        //console.log('Finshed processing, removing ROW');
+        //var rodID = '#' + newMessage.Identifier + 'ROW';
+        //$(rowID).remove();
+    };
+
     $('#more').click(function () {
         response();
     });

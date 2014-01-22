@@ -16,6 +16,7 @@ namespace SNL.GIS.Messaging.Domain.MessageHandlers
         #region Fields
 
         private static ITopicClient TopicClient = new TopicClient(SNLTopic.UserAuthenticatedEvent);
+        private static IQueueClient QueueClient = new QueueClient(SNLQueue.AuthenticateUserCommand);
 
         #endregion
         
@@ -23,7 +24,11 @@ namespace SNL.GIS.Messaging.Domain.MessageHandlers
 
         public void Handle(Message message)
         {
+            // Ensure that the message get set as processed on the Queue
+            QueueClient.ProcessSingle(message);
+
             var authenticateCmd = message.Body as AuthenticateUserCommand;
+            
             if (authenticateCmd != null)
             {
                 var authenticationMessage = new Message

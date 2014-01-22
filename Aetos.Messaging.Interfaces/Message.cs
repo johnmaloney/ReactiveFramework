@@ -13,6 +13,8 @@ namespace Aetos.Messaging.Interfaces
 
         public string ReplyTo { get; set; }
 
+        public long SequenceNumber { get; set; }
+
         private object _body;
 
         public object Body

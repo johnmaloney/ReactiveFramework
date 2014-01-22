@@ -119,8 +119,21 @@ namespace Aetos.Messaging.Azure
             if (_receiveAction != null)
             {
                 _receiveAction(AzureMessage.Unwrap(brokeredMessage));
-                brokeredMessage.Abandon();
+                brokeredMessage.Defer();
             }
+        }
+        
+        /// <summary>
+        /// Will get the message from the Queue, as long as it has been Deferred 
+        /// (http://msdn.microsoft.com/en-us/library/windowsazure/dn328994.aspx)
+        /// The message will be set to Complete on the server.
+        /// </summary>
+        /// <param name="message"></param>
+        public void ProcessSingle(Message message)
+        {
+            var brokeredMessages = _queueClient.ReceiveBatch(new List<long> { message.SequenceNumber });
+            foreach (var brokeredMessage in brokeredMessages)
+                brokeredMessage.Complete();
         }
 
         public void Unsubscribe()

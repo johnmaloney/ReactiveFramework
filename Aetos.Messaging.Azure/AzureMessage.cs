@@ -16,6 +16,7 @@ namespace Aetos.Messaging.Azure
             var raw = brokeredMessage.GetBody<string>();
             var message = JsonConvert.DeserializeObject<Message>(raw);
             message.TransportedBy = "Azure";
+            message.SequenceNumber = brokeredMessage.SequenceNumber;
             return message;
         }
 
