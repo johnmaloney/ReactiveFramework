@@ -28,7 +28,7 @@ namespace SNL.GIS.Services.WebQueue
 
         #region Methods
 
-        public bool ProcessQueueItem(string message)
+        public void ProcessQueueItem(string message)
         {
             dynamic container = JObject.Parse(message);
             var jsonObject = JObject.Parse(container.Body.ToString());
@@ -42,6 +42,8 @@ namespace SNL.GIS.Services.WebQueue
 
             var handler = MessageHandlerFactory.GetMessageHandler(commandMessage);
             handler.Handle(commandMessage);
+
+            QueueSubscriber.Instance.FinishedProcessingQueueItem(container.Identifier.ToString());
         }
 
         #endregion

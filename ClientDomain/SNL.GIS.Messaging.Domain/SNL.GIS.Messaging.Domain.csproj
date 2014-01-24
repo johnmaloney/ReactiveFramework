@@ -43,6 +43,7 @@
     <Compile Include="Commands\InitializeUserCommand.cs" />
     <Compile Include="Commands\AuthenticateUserCommand.cs" />
     <Compile Include="Commands\UserSearchCommand.cs" />
+    <Compile Include="Events\ASNLEvent.cs" />
     <Compile Include="Events\LayerRetrievedEvent.cs" />
     <Compile Include="Events\UserAuthenticatedEvent.cs" />
     <Compile Include="Events\UserLayersEvent.cs" />
