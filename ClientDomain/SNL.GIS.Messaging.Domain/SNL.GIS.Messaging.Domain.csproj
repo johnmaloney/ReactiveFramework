@@ -43,14 +43,15 @@
     <Compile Include="Commands\InitializeUserCommand.cs" />
     <Compile Include="Commands\AuthenticateUserCommand.cs" />
     <Compile Include="Commands\UserSearchCommand.cs" />
-    <Compile Include="Events\ASNLEvent.cs" />
     <Compile Include="Events\LayerRetrievedEvent.cs" />
     <Compile Include="Events\UserAuthenticatedEvent.cs" />
     <Compile Include="Events\UserLayersEvent.cs" />
     <Compile Include="Events\UserSearchResultEvent.cs" />
     <Compile Include="MessageHandlers\AuthenticateUserHandler.cs" />
+    <Compile Include="MessageHandlers\RetrieveLayerHandler.cs" />
     <Compile Include="MessageHandlers\MessageHandlers.cs" />
     <Compile Include="MessageHandlers\InitializeUserHandler.cs" />
+    <Compile Include="MessageHandlers\UserSearchHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SNLQueue.cs" />
     <Compile Include="SNLTopic.cs" />

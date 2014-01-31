@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using SNL.GIS.Clients.Web.Models;
+using SNL.GIS.Messaging.Domain.MessageHandlers;
 
 namespace SNL.GIS.Clients.Web
 {
@@ -25,11 +26,20 @@ namespace SNL.GIS.Clients.Web
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
             AuthenticationSubscriber.Start();
+            UserLayersSubscriber.Start();
+            LayersSubscriber.Start();
+            SearchSubscriber.Start();
+
+            /// Sets up the Message handlers for this domain //
+            MessageHandler.Initialize();
         }
 
         protected void Application_End()
         {
             AuthenticationSubscriber.Stop();
+            UserLayersSubscriber.Stop();
+            LayersSubscriber.Stop();
+            SearchSubscriber.Start();
         }
     }
 }

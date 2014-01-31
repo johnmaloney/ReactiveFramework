@@ -10,7 +10,8 @@
         var messagesBody = messages.find('tbody');
 
         var newRow = '<tr id="' + newMessage.Identifier + 'ROW"> ' +
-                        '<td colspan="3">' + newMessage.Identifier + '</td>' +
+                        '<td>' + newMessage.Identifier + '</td>' +
+                        '<td>' + newMessage.Details + '</td>' +
                         '<td><a class="align-right" id="'+ newMessage.Identifier +'" href="#" data-command=\'' + msg + '\'><i class="fa fa-wrench"></i> PROCESS</a></td>' +
                      '</tr>'
 

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Aetos.Messaging.Interfaces.Events;
 
 namespace SNL.GIS.Messaging.Domain.Events
 {
-    public class UserAuthenticatedEvent : ASNLEvent
+    public class UserAuthenticatedEvent : AEvent
     {
         public bool IsAuthenticated { get; set; }
         public string AuthToken { get; set; }

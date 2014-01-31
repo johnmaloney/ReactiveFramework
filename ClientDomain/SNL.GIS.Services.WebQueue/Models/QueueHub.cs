@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Web;
 using Aetos.Messaging.Domain.Clients;
 using Aetos.Messaging.Handlers;
 using Aetos.Messaging.Interfaces;
+using Aetos.Messaging.Interfaces.Commands;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Newtonsoft.Json;
@@ -95,11 +93,12 @@ namespace SNL.GIS.Services.WebQueue
 
         private void onMessageReceived(Message message)
         {
-            //var item = message.Body as AuthenticateUserCommand;
+            var aCommand = message.Body as ACommand;
 
             dynamic item = new 
             { 
-                Identifier = Guid.NewGuid().ToString(), 
+                Identifier = Guid.NewGuid().ToString(),
+                Details =  aCommand != null ? aCommand.Details : "Unknown Body Type",
                 MessageType = message.MessageType, 
                 Body = message.Body, 
                 SequenceNumber = message.SequenceNumber 

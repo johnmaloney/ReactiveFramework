@@ -28,9 +28,8 @@ namespace SNL.GIS.Messaging.Domain.MessageHandlers
                         Message = "Layers retrieved for user.",
                         Layers = new List<string>
                         {
-                            "http://www.openstreetmap.org/?minlon=22.3418234&minlat=57.5129102&maxlon=22.5739625&maxlat=57.6287332#map=8/57.467/21.891&layers=T", 
-                            "http://www.openstreetmap.org/?minlon=22.3418234&minlat=57.5129102&maxlon=22.5739625&maxlat=57.6287332#map=8/57.467/21.891&layers=Q", 
-                            "http://www.openstreetmap.org/way/223131374"
+                            "usgs:tracts", 
+                            "topp:tasmania_state_boundaries"
                         }
                     }
                 };

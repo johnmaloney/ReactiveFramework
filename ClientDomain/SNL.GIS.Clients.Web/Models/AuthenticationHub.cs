@@ -6,6 +6,7 @@ using System.Web;
 using Aetos.Messaging.Domain;
 using Aetos.Messaging.Domain.Clients;
 using Aetos.Messaging.Interfaces;
+using Aetos.Messaging.Web.Common;
 using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Newtonsoft.Json;
@@ -43,59 +44,46 @@ namespace SNL.GIS.Clients.Web.Models
         #endregion
     }
 
-    public class AuthenticationSubscriber
+    public class AuthenticationSubscriber : ASubscriber<AuthenticationHub, AuthenticationSubscriber>
     {
         #region Fields
 
-        private TopicClient topicClient;
+        /// <summary>
+        /// This client will be used to react to the Authentication Event and send a initialize command //
+        /// </summary>
+        private IQueueClient initializationQueueClient = new QueueClient(SNLQueue.InitializeUserLayersCommand);
 
         #endregion
 
         #region Properties
-
-        public static AuthenticationSubscriber Instance { get; set; }
-        private IHubConnectionContext Clients { get; set; }
-
         #endregion
 
         #region Methods
 
-        private AuthenticationSubscriber()
+        private AuthenticationSubscriber() 
+            : base(SNLTopic.UserAuthenticatedEvent)
         {
-            Clients = GlobalHost.ConnectionManager.GetHubContext<AuthenticationHub>().Clients;
-            var subscriberName = Dns.GetHostName();
-            topicClient = new TopicClient(SNLTopic.UserAuthenticatedEvent, subscriberName);
-            topicClient.Subscribe(OnMessageReceived);
         }
 
-        private void OnMessageReceived(Message message)
+        protected override void OnMessageReceived(Message message)
         {
             var authEvent = message.Body as UserAuthenticatedEvent;
 
             var json = JsonConvert.SerializeObject(authEvent);
             Clients.Client(authEvent.Identifier).authenticated(json);
-        }
 
-        public static void Start()
-        {
-            if (Instance == null)
-                Instance = new AuthenticationSubscriber();
-        }
-
-        public static void Stop()
-        {
-            if (Instance != null)
+            // READ ME - Once the AuthenticationTopic is received we want to also process the initialize Command ///
+            var initializeMessage = new Message
             {
-                Instance.StopInternal();
-                Instance = null;
-            }
-        }
+                Body = new InitializeUserCommand
+                {
+                    InstanceId = Guid.NewGuid(),
+                    Identifier = authEvent.Identifier
+                }
+            };
 
-        private void StopInternal()
-        {
-            topicClient.DeleteSubscription();
-            topicClient.Unsubscribe();
-            topicClient = null;
+            this.initializationQueueClient.Send(initializeMessage);
+
         }
 
         #endregion

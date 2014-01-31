@@ -40,6 +40,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SNL.GIS.Clients.Web", "Clie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SNL.GIS.Services.WebQueue", "ClientDomain\SNL.GIS.Services.WebQueue\SNL.GIS.Services.WebQueue.csproj", "{6AC54A09-E054-4C6B-853E-5F27EB7AF81E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aetos..Messaging.Web.Common", "ClientDomain\Aetos..Messaging.Web.Common\Aetos..Messaging.Web.Common.csproj", "{D6A83F09-9EAE-4D1E-A83A-6968C93641DC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{756202BA-8740-4DE9-B6CA-7F5D6061212C}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +99,10 @@ Global
 		{6AC54A09-E054-4C6B-853E-5F27EB7AF81E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6AC54A09-E054-4C6B-853E-5F27EB7AF81E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6AC54A09-E054-4C6B-853E-5F27EB7AF81E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D6A83F09-9EAE-4D1E-A83A-6968C93641DC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D6A83F09-9EAE-4D1E-A83A-6968C93641DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D6A83F09-9EAE-4D1E-A83A-6968C93641DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D6A83F09-9EAE-4D1E-A83A-6968C93641DC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,6 +118,7 @@ Global
 		{7E8123AD-A884-49FC-917C-919DF9A77531} = {753FD236-8BAE-4C97-825E-B063F83079F7}
 		{07DA27D9-74E1-4507-B547-DF83C50FC55B} = {753FD236-8BAE-4C97-825E-B063F83079F7}
 		{6AC54A09-E054-4C6B-853E-5F27EB7AF81E} = {753FD236-8BAE-4C97-825E-B063F83079F7}
+		{D6A83F09-9EAE-4D1E-A83A-6968C93641DC} = {753FD236-8BAE-4C97-825E-B063F83079F7}
 		{E21B6D58-53EE-4F79-9CB8-39461958F347} = {FDBA05FD-4485-46D5-8785-7B6151880446}
 	EndGlobalSection
 EndGlobal
