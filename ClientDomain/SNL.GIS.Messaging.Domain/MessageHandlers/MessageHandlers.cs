@@ -18,5 +18,13 @@ namespace SNL.GIS.Messaging.Domain.MessageHandlers
             MessageHandlerFactory.AddOrReplace(typeof(RetrieveLayerCommand), new RetrieveLayerHandler());
             MessageHandlerFactory.AddOrReplace(typeof(UserSearchCommand), new UserSearchHandler());
         }
+
+        public static void Initialize(List<dynamic> searchableCollection)
+        {
+            MessageHandlerFactory.AddOrReplace(typeof(AuthenticateUserCommand), new AuthenticateUserHandler());
+            MessageHandlerFactory.AddOrReplace(typeof(InitializeUserCommand), new InitializeUserHandler());
+            MessageHandlerFactory.AddOrReplace(typeof(RetrieveLayerCommand), new RetrieveLayerHandler());
+            MessageHandlerFactory.AddOrReplace(typeof(UserSearchCommand), new UserSearchHandler(searchableCollection));
+        }
     }
 }

@@ -9,6 +9,7 @@ using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using Newtonsoft.Json;
 using SNL.GIS.Messaging.Domain;
+using SNL.GIS.Messaging.Domain.Commands;
 using SNL.GIS.Messaging.Domain.Events;
 
 namespace SNL.GIS.Clients.Web.Models
@@ -26,6 +27,23 @@ namespace SNL.GIS.Clients.Web.Models
         #endregion
 
         #region Methods
+
+        public void Search(string criteria)
+        {
+            var message = new Message
+            {
+                Body = new UserSearchCommand
+                {
+                    InstanceId = Guid.NewGuid(), 
+                    Identifier = Context.ConnectionId,
+                    ResultCountDesired = 15,
+                    SearchCriteria =  criteria
+                }
+            };
+
+            searchQueueClient.Send(message);
+        }
+
         #endregion
     }
 
@@ -50,7 +68,7 @@ namespace SNL.GIS.Clients.Web.Models
             var searchEvent = message.Body as UserSearchResultEvent;
 
             var json = JsonConvert.SerializeObject(searchEvent);
-            Clients.Client(searchEvent.Identifier).searchResultsReceived(json);
+            Clients.Client(searchEvent.Identifier).searchResult(json);
         }
 
         #endregion

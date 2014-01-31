@@ -11,6 +11,7 @@ using Newtonsoft.Json.Linq;
 using SNL.GIS.Messaging.Domain;
 using SNL.GIS.Messaging.Domain.Commands;
 using SNL.GIS.Messaging.Domain.MessageHandlers;
+using SNL.GIS.Services.WebQueue.Models;
 
 namespace SNL.GIS.Services.WebQueue
 {
@@ -88,7 +89,7 @@ namespace SNL.GIS.Services.WebQueue
             }
 
             /// Sets up the Message handlers for this domain //
-            MessageHandler.Initialize();
+            MessageHandler.Initialize(BranchesRepository.AllBranches());
         }
 
         private void onMessageReceived(Message message)

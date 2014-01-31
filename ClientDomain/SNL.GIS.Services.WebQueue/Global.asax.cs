@@ -6,6 +6,7 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using SNL.GIS.Services.WebQueue.Models;
 
 namespace SNL.GIS.Services.WebQueue
 {

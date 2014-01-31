@@ -9,7 +9,11 @@ namespace SNL.GIS.Messaging.Domain.Events
 {
     public class UserSearchResultEvent : AEvent
     {
-        public List<string> Results { get; set; }
+        public int ResultCount { get; set; }
+
+        public int TotalResultsForSearch { get; set; }
+
+        public List<dynamic> Results { get; set; }
 
         public override string Details
         {

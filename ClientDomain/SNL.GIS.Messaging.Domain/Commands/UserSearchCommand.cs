@@ -11,6 +11,8 @@ namespace SNL.GIS.Messaging.Domain.Commands
     {
         public string SearchCriteria { get; set; }
 
+        public int ResultCountDesired { get; set; }
+
         public override string Details
         {
             get { return string.Format("User Search Command with search criteria:{0}", SearchCriteria); }

@@ -19,6 +19,10 @@
     });
 
     $('#searchData').click(function () {
+
+        var criteria = $('#searchCriteria').val();
+        searchHub.server.search(criteria);
+
     });
 
     $('#retrieveShapeLayers').click(function () {
