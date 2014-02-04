@@ -69,11 +69,11 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Aetos.Messaging.Domain\Aetos.Messaging.Domain.csproj">
+    <ProjectReference Include="..\Aetos.Messaging.Domain\Aetos.Messaging.Domain.csproj">
       <Project>{434b1256-13a8-4cca-bfd7-ea0d53f757d8}</Project>
       <Name>Aetos.Messaging.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Aetos.Messaging.Interfaces\Aetos.Messaging.Interfaces.csproj">
+    <ProjectReference Include="..\Aetos.Messaging.Interfaces\Aetos.Messaging.Interfaces.csproj">
       <Project>{9047d197-c6be-436d-ad6b-671d2432dc3e}</Project>
       <Name>Aetos.Messaging.Interfaces</Name>
     </ProjectReference>
