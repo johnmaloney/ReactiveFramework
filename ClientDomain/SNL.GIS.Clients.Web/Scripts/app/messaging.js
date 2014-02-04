@@ -9,7 +9,7 @@
     authHub.client.authenticated = topicReceived;
     layersHub.client.layersInitialized = userLayersInitialized;
     layersHub.client.layerReceived = layerResultReceived;
-    searchHub.client.searchResult = topicReceived;
+    searchHub.client.searchResult = searchResultsReceived;
 
     $.connection.hub.start();
     
@@ -70,6 +70,31 @@
         }
     };
 
+    function searchResultsReceived(msg) {
+
+        topicReceived(msg);
+
+        var messages = $('#searchResults');
+        var messagesBody = messages.find('tbody');
+        messagesBody.empty();
+
+        var newMessage = JSON.parse(msg);
+        for (var branch in newMessage.Results) {
+
+            var newRow =
+            '<tr> ' +
+                '<td>' + newMessage.Results[branch].keyBranch + '</td>' +
+                '<td>' + newMessage.Results[branch].description + '</td>' +
+                '<td>' + newMessage.Results[branch].street1 + '  ' + newMessage.Results[branch].zip + '</td>' +
+                '<td>' + newMessage.Results[branch].latitude + '</td>' +
+                '<td>' + newMessage.Results[branch].longitude + '</td>' +
+            '</tr>';
+
+            messagesBody.append(newRow);
+
+        };
+    };
+
     function topicReceived(msg) {
         console.log(msg);
         var newMessage = JSON.parse(msg);
@@ -78,8 +103,8 @@
         var messagesBody = messages.find('tbody');
 
         var newRow = '<tr> ' +
-                        '<td>' + newMessage.Details + '</td>'
-        '</tr>'
+                        '<td>' + newMessage.Details + '</td>' +
+                    '</tr>';
 
         messagesBody.append(newRow);
     };

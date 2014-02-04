@@ -94,7 +94,7 @@ namespace SNL.GIS.Clients.Web.Models
         protected override void OnMessageReceived(Message message)
         {
             var layersEvent = message.Body as LayerRetrievedEvent;
-
+            
             var json = JsonConvert.SerializeObject(layersEvent);
             Clients.Client(layersEvent.Identifier).layerReceived(json);
         }
