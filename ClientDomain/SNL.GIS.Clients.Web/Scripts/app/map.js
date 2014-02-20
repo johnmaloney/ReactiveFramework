@@ -71,16 +71,21 @@ var OpenLayersMap = function (elementName) {
 
     var map = new ol.Map({
         target: elementName,
+        //layers: [
+        //    new ol.layer.Tile({
+        //        source: new ol.source.MapQuest({ layer: 'sat' })
+        //    })
+        //],
         layers: [
             new ol.layer.Tile({
-            source: new ol.source.XYZ({
-                attributions: [attribution],
-                url: 'http://server.arcgisonline.com/ArcGIS/rest/services/' +
-                    'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
+                source: new ol.source.XYZ({
+                    attributions: [attribution],
+                    url: 'http://server.arcgisonline.com/ArcGIS/rest/services/' +
+                        'World_Topo_Map/MapServer/tile/{z}/{y}/{x}'
                 })
             })
         ],
-        renderer: ol.RendererHint.CANVAS,
+        renderer: 'canvas',
         view: new ol.View2D({
             center: ol.proj.transform([-100.1, 35.5], 'EPSG:4326', 'EPSG:3857'),
             zoom: 2
