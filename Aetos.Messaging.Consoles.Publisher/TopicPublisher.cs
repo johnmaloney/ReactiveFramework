@@ -62,14 +62,14 @@ namespace Aetos.Messaging.Consoles.Publisher
             var cmd = Console.ReadLine();
             while (cmd != "x")
             {
-                PublishMockGeneralMessage();
+                PublishMockGeneralMessage(Console.ReadLine());
                 cmd = Console.ReadLine();
             }
         }
 
-        private static void PublishMockGeneralMessage()
+        private static void PublishMockGeneralMessage(string messageToSend)
         {
-            var generalMessage = GetGeneralMessage();
+            var generalMessage = GetGeneralMessage(messageToSend);
 
             TopicClient.Publish(new Message
             {
@@ -79,12 +79,13 @@ namespace Aetos.Messaging.Consoles.Publisher
             Console.WriteLine("Published new General Message.");
         }
 
-        public static GeneralEvent GetGeneralMessage()
+        public static GeneralEvent GetGeneralMessage(string messageToSend)
         {
             // This is a default or test message generator //
             return new GeneralEvent()
             {
-                Message = "New Topic, identifier: #" + new Random().Next().ToString(),
+                Message = !string.IsNullOrEmpty(messageToSend) ? messageToSend : "New Console Topic" 
+                + ", identifier: #" + new Random().Next().ToString(),
                 LastUpdated = DateTime.UtcNow
             };
         }

@@ -56,7 +56,9 @@ namespace Aetos.Messaging.Common.Logging
                         Console.ForegroundColor = ConsoleColor.Red;
                         break;
                 }
+                Console.WriteLine("          --------------------              ");
                 Console.WriteLine(entry.ToString());
+                Console.WriteLine("          --------------------              ");
                 Console.ResetColor();
 
                 //var logToMongo = ConfigurationManager.AppSettings["logToMongo"];
